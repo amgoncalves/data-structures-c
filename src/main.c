@@ -12,7 +12,7 @@
 void
 alltests(void)
 {
-	printf("%s node test\n", nodetest() ? "Failed" : "Passed");
+	printf("%s node test\n", nodetest() ? "Passed" : "Failed");
 
 }
 
