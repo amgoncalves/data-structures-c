@@ -32,6 +32,8 @@ freenode(node *p)
 }
 
 /*
+	Make node, print node information, and delete node.
+
 	Return 0 if test passed.
 	Return 1 if makenode failed.
 	Return 2 if freenode failed.
@@ -43,5 +45,33 @@ nodetest(void)
 	p = makenode(10, NULL);
 	if (!p)
 		return 1;
+	nodeprint(p);
+	nodepr(p);
 	return freenode(p);
 }
+
+/* Print node details. */
+int
+nodeprint(node *p)
+{
+	if (!p) {
+		fprintf(stderr, "Cannot print info for nonexistent node.\n");
+		return 1;
+	}
+	printf("Node %p: data: %d, next: %p\n", p, p->data, p->next);
+	return 0;
+}
+
+/* Abbreviated nodeprint. */
+int
+nodepr(node *p)
+{
+	if (!p) {
+		fprintf(stderr, "Cannot print info for nonexistent node.\n");
+		return 1;
+	}
+	printf("%d | %p\n", p->data, p->next);
+	return 0;
+}
+
+

@@ -15,3 +15,5 @@ typedef struct node node;
 node * makenode(int i, node *p);
 int freenode(node *p);
 int nodetest(void);
+int nodeprint(node *p);
+int nodepr(node *p);
