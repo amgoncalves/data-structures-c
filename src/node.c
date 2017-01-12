@@ -1,4 +1,8 @@
-/* node.c */
+/*
+	node.c
+
+	Implementation for creating, initializing, deleting, and testing data structure nodes.
+*/
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -37,7 +41,9 @@ freenode(node *p)
 	return 1;
 }
 
-/* Print node details. */
+/*
+	Print node details for debugging.
+*/
 int
 nodeprint(node *p)
 {
@@ -49,7 +55,9 @@ nodeprint(node *p)
 	return 1;
 }
 
-/* Abbreviated nodeprint. */
+/*
+	Abbreviated nodeprint.
+*/
 int
 nodepr(node *p)
 {
