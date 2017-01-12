@@ -7,13 +7,14 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "node.h"
+#include "linkedlist.h"
 
 /* Run all tests. */
 void
 alltests(void)
 {
-	printf("%s node test\n", nodetest() ? "Passed" : "Failed");
-
+	printf("%s node test\n\n", nodetest() ? "Passed" : "Failed");
+	printf("%s linked list test\n\n", listtest() ? "Passed" : "Failed");
 }
 
 int
