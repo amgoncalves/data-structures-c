@@ -25,15 +25,15 @@ listmakerec(int i)
 	Returns a pointer to freed space in memory.		
 */
 List
-listfree(List L) 
+listfree(List l) 
 {
-	if (!L) {
+	if (!l) {
 		fprintf(stderr, "List is empty.\n");
 		return NULL;
 	}	
 	Node *p;
 	Node *q;
-	for (p = L; p; p = q) {
+	for (p = l; p; p = q) {
 		q = p->next;
 		freenode(p);
 	}
@@ -45,15 +45,15 @@ listfree(List L)
 	Returns a pointer to the head of the reversed list.
 */
 List
-listreverse(List L)
+listreverse(List l)
 {
-	if (!L) {
+	if (!l) {
 		fprintf(stderr, "List is empty.\n");
 		return NULL;
 	}	
 	Node *p, *next, *prev;
 	prev = NULL;
-	for (p = L; p; p = next) {
+	for (p = l; p; p = next) {
 		next = p->next;
 		p->next = prev;
 		prev = p;
@@ -66,24 +66,24 @@ listreverse(List L)
 	List head is lowest value, list tail is the greatest.
 */
 List
-listinsertsort(List L, int i)
+listinsertsort(List l, int i)
 {
 	Node *p, *q, *prev;
 	p = makenode(i, NULL);
 	if (!p) {
 		fprintf(stderr, "Could not insert int, malloc error.\n");
-		return L;
+		return l;
 	}
 	/* Check if int should be inserted at list head. */
-	q = L;
+	q = l;
 	if (q->data >= i) {
-		p->next = L;
-		L = p;
-		return L;
+		p->next = l;
+		l = p;
+		return l;
 	}
 	/* Search for int within list. */
 	prev = q;
-	for (q = L->next; q; q = q->next) {
+	for (q = l->next; q; q = q->next) {
 		if (q->data >= i) {
 			p->next = q;
 			prev->next = p;
@@ -94,22 +94,22 @@ listinsertsort(List L, int i)
 	/* Check if int should be inserted at list tail. */
 	if (!q)
 		prev->next = p;
-	return L;
+	return l;
 }
 
 /*
 	Print a list for debugging. 
 */
 int
-listprint(List L)
+listprint(List l)
 {
 	Node *p;
-	if (!L) {
+	if (!l) {
 		fprintf(stderr, "List is empty.\n");
 		return 0;
 	}
 	puts("Printing linked list:");
-	for (p = L; p; p = p->next)
+	for (p = l; p; p = p->next)
 		if (!nodepr(p))
 			return 0;
 	return 1;
@@ -130,22 +130,22 @@ listprint(List L)
 int
 listtest(void)
 {
-	List L;
+	List l;
 	int arr[] = { 1, 10, 105, 0, -20 };
 	int i, arrsize = 5;
-	L = listmakerec(10);
-	if (!L)
+	l = listmakerec(10);
+	if (!l)
 		return 0;
-	if (!listprint(L))
+	if (!listprint(l))
 		return 0;
-	L = listreverse(L);
+	l = listreverse(l);
 	for (i = 0; i < arrsize; i++) 
-		L = listinsertsort(L, arr[i]);
-	if (!listprint(L))
+		l = listinsertsort(l, arr[i]);
+	if (!listprint(l))
 		return 0;
-	L = listfree(L);
-	if (listprint(L))
+	l = listfree(l);
+	if (listprint(l))
 		return 0;
-	free(L);
+	free(l);
 	return 1;
 }

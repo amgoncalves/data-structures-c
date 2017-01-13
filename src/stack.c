@@ -16,73 +16,73 @@
 Stack
 stackinit(int d)
 {
-	Stack S;
-	S = malloc(sizeof *S);
-	if (!S) {
+	Stack s;
+	s = malloc(sizeof *s);
+	if (!s) {
 		fprintf(stderr, "Malloc fail.\n");
 		return NULL;	
 	}
-	S->Head = NULL;
-	S->maxsize = d;
-	S->currentsize = 0;
-	return S;
+	s->head = NULL;
+	s->maxsize = d;
+	s->currentsize = 0;
+	return s;
 }
 
 /*
 	Return 1 if stack is empty, 0 otherwise.
 */
 int
-stackisempty(Stack S)
+stackisempty(Stack s)
 {
-	return (S->Head == NULL) && (S->currentsize == 0);
+	return (s->head == NULL) && (s->currentsize == 0);
 }
 
 /*
 	Return 1 if stack is full, 0 otherwise.
 */
 int
-stackisfull(Stack S)
+stackisfull(Stack s)
 {
-	return S->currentsize >= S->maxsize;
+	return s->currentsize >= s->maxsize;
 }
 
 /*
 	Push new integer onto top of stack.
 */
 void
-push(Stack S, int d)
+push(Stack s, int d)
 {
-	if (stackisfull(S)) {
+	if (stackisfull(s)) {
 		fprintf(stderr, "Push failed, Stack is full.\n");
 		return;
 	}
 	Node *p;
-	p = makenode(d, S->Head);
+	p = makenode(d, s->head);
 	if (!p) {
 		fprintf(stderr, "Push failed, malloc error.\n");
 		return;
 	}
-	S->Head = p;
-	S->currentsize++;
+	s->head = p;
+	s->currentsize++;
 }
 
 /*
 	Pop integer from top of stack.
 */
 int
-pop(Stack S)
+pop(Stack s)
 {
-	if (stackisempty(S)) {
+	if (stackisempty(s)) {
 		fprintf(stderr, "Pop failed, Stack is empty.\n");
 		return -1;
 	}
 	int d;
 	Node *p;
-	p = S->Head;
+	p = s->head;
 	d = p->data;
-	S->Head = p->next;
+	s->head = p->next;
 	free(p);
-	S->currentsize--;
+	s->currentsize--;
 	return d;
 }
 
@@ -90,40 +90,40 @@ pop(Stack S)
 	Reverse contents of a stack.
 */
 Stack
-reversestack(Stack S)
+reversestack(Stack s)
 {
-	if (stackisempty(S)) {
+	if (stackisempty(s)) {
 		fprintf(stderr, "Stack is empty.\n");
-		return S;
+		return s;
 	}
 	Node *p, *prev, *next;
 	prev = NULL;
-	for (p = S->Head; p; p = next) {
+	for (p = s->head; p; p = next) {
 		next = p->next;		
 		p->next = prev;
 		prev = p;
 	}
-	S->Head = prev;
-	return S;
+	s->head = prev;
+	return s;
 }
 
 /*
 	Cleanup a stack list, return pointer to the empty stack.
 */
 Stack
-freestack(Stack S)
+freestack(Stack s)
 {
-	if (stackisempty(S)) {
+	if (stackisempty(s)) {
 		fprintf(stderr, "Stack is empty.\n");
 		return NULL;
 	}
-	struct node *p, *q;
-	for (p = S->Head; p; p = q) {
+	Node *p, *q;
+	for (p = s->head; p; p = q) {
 		q = p->next;
 		free(p);
 	}
-	S->currentsize = 0;
-	return S;
+	s->currentsize = 0;
+	return s;
 }
 
 /*
@@ -131,22 +131,22 @@ freestack(Stack S)
 	Return 1 if successful, otherwise return 0.
 */
 int
-stackprint(Stack S)
+stackprint(Stack s)
 {
-	if (!S) {
+	if (!s) {
 		fprintf(stderr, "Stack must be initialized before printing.\n");
 		return 0;
 	}
-	printf("Stack current size: %d | Max size: %d\n", S->currentsize, S->maxsize);
-	if (stackisempty(S)) {
+	printf("Stack current size: %d | Max size: %d\n", s->currentsize, s->maxsize);
+	if (stackisempty(s)) {
 		puts("Stack is empty.");
 		return 1;	
 	}
 	Node *p;
-	for (p = S->Head; p; p = p->next)
+	for (p = s->head; p; p = p->next)
 		if (!nodepr(p))
 			return 0;
-	if (stackisfull(S))
+	if (stackisfull(s))
 		puts("Stack is full.");
 	return 1;
 }
@@ -168,16 +168,16 @@ stacktest(void)
 {
 	int i, j, size;
 	size = 15;
-	Stack S;
-	S = NULL;
-	S = stackinit(size);
-	if (!S)
+	Stack s;
+	s = NULL;
+	s = stackinit(size);
+	if (!s)
 		return 0;
 	for (i = 1; i <= size; i++)
-		push(S, i);
-	S = reversestack(S);
-	while (S->currentsize > 0) {
-		j = pop(S);
+		push(s, i);
+	s = reversestack(s);
+	while (s->currentsize > 0) {
+		j = pop(s);
 		if (j % 3 == 0 && j % 5 == 0)
 			puts("BilboBaggins");
 		else if (j % 3 == 0)
@@ -185,12 +185,12 @@ stacktest(void)
 		else if (j % 5 == 0)
 			puts("Baggins");
 	}
-	if (!stackisempty(S)) {
+	if (!stackisempty(s)) {
 		fprintf(stderr, "Pop error, stack is not empty.\n");
-		freestack(S);
-		free(S);
+		freestack(s);
+		free(s);
 		return 0;
 	}
-	free(S);
+	free(s);
 	return 1;
 }

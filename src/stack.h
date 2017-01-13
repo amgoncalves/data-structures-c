@@ -1,7 +1,7 @@
 /* stack.h */
 
 struct stack {
-	Node * Head;	
+	Node * head;	
 	int maxsize;
 	int currentsize;
 };
@@ -9,12 +9,12 @@ struct stack {
 typedef struct stack * Stack;
 
 Stack stackinit(int d);
-int stackisempty(Stack S);
-int stackisfull(Stack S);
-void push(Stack S, int d);
-int pop(Stack S);
-Stack reversestack(Stack S);
-Stack freestack(Stack S);
-int stackprint(Stack S);
+int stackisempty(Stack s);
+int stackisfull(Stack s);
+void push(Stack s, int d);
+int pop(Stack s);
+Stack reversestack(Stack s);
+Stack freestack(Stack s);
+int stackprint(Stack s);
 
 int stacktest(void);
