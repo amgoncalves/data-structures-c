@@ -12,10 +12,10 @@
 	Allocate space in memory for a node and initialize node variables.
 	Return a pointer if successful, NULL otherwise.
 */
-node *
-makenode(int i, node *p) 
+Node *
+makenode(int i, Node *p) 
 {
-	node *q;
+	Node *q;
 	q = malloc(sizeof *q);
 	if (!q) {
 		fprintf(stderr, "Malloc error.\n");
@@ -31,7 +31,7 @@ makenode(int i, node *p)
 	Return 1 if successful, 0 otherwise.
 */
 int 
-freenode(node *p)
+freenode(Node *p)
 {
 	if (!p) {
 		fprintf(stderr, "Cannot free empty node.\n");
@@ -45,7 +45,7 @@ freenode(node *p)
 	Print node details for debugging.
 */
 int
-nodeprint(node *p)
+nodeprint(Node *p)
 {
 	if (!p) {
 		fprintf(stderr, "Cannot print info for nonexistent node.\n");
@@ -59,7 +59,7 @@ nodeprint(node *p)
 	Abbreviated nodeprint.
 */
 int
-nodepr(node *p)
+nodepr(Node *p)
 {
 	if (!p) {
 		fprintf(stderr, "Cannot print info for nonexistent node.\n");
@@ -80,7 +80,7 @@ nodepr(node *p)
 int 
 nodetest(void)
 {
-	node *p;
+	Node *p;
 	p = makenode(10, NULL);
 	if (!p) {
 		fprintf(stderr, "Node test failed on makenode.\n");

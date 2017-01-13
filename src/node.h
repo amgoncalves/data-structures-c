@@ -7,14 +7,14 @@
 */
 struct node { 
 	int data; 
-  struct node *next;
+  struct node * next;
 };
 
-typedef struct node node;
+typedef struct node Node;
 
-node * makenode(int i, node *p);
-int freenode(node *p);
-int nodeprint(node *p);
-int nodepr(node *p);
+Node * makenode(int i, Node *p);
+int freenode(Node *p);
+int nodeprint(Node *p);
+int nodepr(Node *p);
 
 int nodetest(void);

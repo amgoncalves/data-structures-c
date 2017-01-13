@@ -1,10 +1,11 @@
 /* linkedlist.h */
 
-typedef node * List;
+typedef Node * List;
 
-List listmake(int i);
+List listmakerec(int i);
 List listfree(List L);
 List listreverse(List L);
+List listinsertsort(List L, int i);
 int listprint(List L);
 
 int listtest(void);

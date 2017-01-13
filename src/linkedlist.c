@@ -13,11 +13,11 @@
 	Returns a pointer to the head of the linked list.
 */
 List
-listmake(int i) 
+listmakerec(int i) 
 {
 	if (i <= 0)
 		return NULL;
-	return makenode(i, listmake(i - 1));
+	return makenode(i, listmakerec(i - 1));
 }
 
 /*
@@ -31,8 +31,8 @@ listfree(List L)
 		fprintf(stderr, "List is empty.\n");
 		return NULL;
 	}	
-	node *p;
-	node *q;
+	Node *p;
+	Node *q;
 	for (p = L; p; p = q) {
 		q = p->next;
 		freenode(p);
@@ -51,7 +51,7 @@ listreverse(List L)
 		fprintf(stderr, "List is empty.\n");
 		return NULL;
 	}	
-	node *p, *next, *prev;
+	Node *p, *next, *prev;
 	prev = NULL;
 	for (p = L; p; p = next) {
 		next = p->next;
@@ -62,12 +62,48 @@ listreverse(List L)
 }
 
 /*
+	Insert an integer into a numerically sorted list.
+	List head is lowest value, list tail is the greatest.
+*/
+List
+listinsertsort(List L, int i)
+{
+	Node *p, *q, *prev;
+	p = makenode(i, NULL);
+	if (!p) {
+		fprintf(stderr, "Could not insert int, malloc error.\n");
+		return L;
+	}
+	/* Check if int should be inserted at list head. */
+	q = L;
+	if (q->data >= i) {
+		p->next = L;
+		L = p;
+		return L;
+	}
+	/* Search for int within list. */
+	prev = q;
+	for (q = L->next; q; q = q->next) {
+		if (q->data >= i) {
+			p->next = q;
+			prev->next = p;
+			break;
+		}
+		prev = q;
+	}
+	/* Check if int should be inserted at list tail. */
+	if (!q)
+		prev->next = p;
+	return L;
+}
+
+/*
 	Print a list for debugging. 
 */
 int
 listprint(List L)
 {
-	node *p;
+	Node *p;
 	if (!L) {
 		fprintf(stderr, "List is empty.\n");
 		return 0;
@@ -94,12 +130,17 @@ int
 listtest(void)
 {
 	List L;
-	L = listmake(10);
+	L = listmakerec(10);
 	if (!L)
 		return 0;
 	if (!listprint(L))
 		return 0;
 	L = listreverse(L);
+	L = listinsertsort(L, 1);
+	L = listinsertsort(L, 10);
+	L = listinsertsort(L, 105);
+	L = listinsertsort(L, 0);
+	L = listinsertsort(L, -20);
 	if (!listprint(L))
 		return 0;
 	L = listfree(L);
