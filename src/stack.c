@@ -77,7 +77,7 @@ pop(Stack S)
 		return -1;
 	}
 	int d;
-	struct node *p;
+	Node *p;
 	p = S->Head;
 	d = p->data;
 	S->Head = p->next;
