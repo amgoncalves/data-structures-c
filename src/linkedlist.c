@@ -120,6 +120,7 @@ listprint(List L)
 		- Make list of 10 nodes.
 		- Print list.
 		- Reverse node order.
+		- Add the following integers: 1, 10, 105, 0, -20
 		- Print list.
 		- Free list.
 		- Attempt to print empty list.
@@ -130,21 +131,21 @@ int
 listtest(void)
 {
 	List L;
+	int arr[] = { 1, 10, 105, 0, -20 };
+	int i, arrsize = 5;
 	L = listmakerec(10);
 	if (!L)
 		return 0;
 	if (!listprint(L))
 		return 0;
 	L = listreverse(L);
-	L = listinsertsort(L, 1);
-	L = listinsertsort(L, 10);
-	L = listinsertsort(L, 105);
-	L = listinsertsort(L, 0);
-	L = listinsertsort(L, -20);
+	for (i = 0; i < arrsize; i++) 
+		L = listinsertsort(L, arr[i]);
 	if (!listprint(L))
 		return 0;
 	L = listfree(L);
 	if (listprint(L))
 		return 0;
+	free(L);
 	return 1;
 }
