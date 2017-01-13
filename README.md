@@ -5,7 +5,8 @@ Each data structure is implemented in its own separate module.  Data is encapsul
 
 ## TODO:
 - [x] Linked List
-- [ ] Circular Queue
-- [ ] LMCRSIB Tree
+- [ ] Stack
+- [ ] Queue
+- [ ] Tree
 - [ ] Heap
 - [ ] Graph
