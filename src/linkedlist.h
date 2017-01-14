@@ -1,5 +1,8 @@
 /* linkedlist.h */
 
+/*
+	A linked list is a pointer to the head of a list of Nodes.
+*/
 typedef Node * List;
 
 List listmakerec(int i);

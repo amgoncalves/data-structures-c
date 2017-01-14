@@ -1,9 +1,9 @@
 /* node.h */
 
 /*
-	Each node structure contains:
-	data  An integer.
-	next  A pointer to the next node.
+	A Node contains:
+		data  An integer.
+		next  A pointer to the next node.
 */
 struct node { 
 	int data; 

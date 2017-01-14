@@ -23,8 +23,8 @@ stackinit(int d)
 		return NULL;	
 	}
 	s->head = NULL;
-	s->maxsize = d;
-	s->currentsize = 0;
+	s->capacity = d;
+	s->size = 0;
 	return s;
 }
 
@@ -34,7 +34,7 @@ stackinit(int d)
 int
 stackisempty(Stack s)
 {
-	return (s->head == NULL) && (s->currentsize == 0);
+	return (s->head == NULL) && (s->size == 0);
 }
 
 /*
@@ -43,7 +43,7 @@ stackisempty(Stack s)
 int
 stackisfull(Stack s)
 {
-	return s->currentsize >= s->maxsize;
+	return s->size >= s->capacity;
 }
 
 /*
@@ -63,7 +63,7 @@ push(Stack s, int d)
 		return;
 	}
 	s->head = p;
-	s->currentsize++;
+	s->size++;
 }
 
 /*
@@ -82,7 +82,7 @@ pop(Stack s)
 	d = p->data;
 	s->head = p->next;
 	free(p);
-	s->currentsize--;
+	s->size--;
 	return d;
 }
 
@@ -122,7 +122,7 @@ freestack(Stack s)
 		q = p->next;
 		free(p);
 	}
-	s->currentsize = 0;
+	s->size = 0;
 	return s;
 }
 
@@ -137,7 +137,7 @@ stackprint(Stack s)
 		fprintf(stderr, "Stack must be initialized before printing.\n");
 		return 0;
 	}
-	printf("Stack current size: %d | Max size: %d\n", s->currentsize, s->maxsize);
+	printf("Stack current size: %d | Max size: %d\n", s->size, s->capacity);
 	if (stackisempty(s)) {
 		puts("Stack is empty.");
 		return 1;	
@@ -176,7 +176,7 @@ stacktest(void)
 	for (i = 1; i <= size; i++)
 		push(s, i);
 	s = reversestack(s);
-	while (s->currentsize > 0) {
+	while (s->size > 0) {
 		j = pop(s);
 		if (j % 3 == 0 && j % 5 == 0)
 			puts("BilboBaggins");
