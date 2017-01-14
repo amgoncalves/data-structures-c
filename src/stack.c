@@ -6,6 +6,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <assert.h>
 #include "node.h"
 #include "stack.h"
 
@@ -72,10 +73,7 @@ push(Stack s, int d)
 int
 pop(Stack s)
 {
-	if (stackisempty(s)) {
-		fprintf(stderr, "Pop failed, Stack is empty.\n");
-		return -1;
-	}
+	assert(!stackisempty(s));
 	int d;
 	Node *p;
 	p = s->head;
