@@ -6,7 +6,7 @@ Each data structure is implemented in its own separate module.  Data is encapsul
 ## TODO:
 - [x] Linked List
 - [x] Stack
-- [ ] Queue
+- [x] Queue
 - [ ] Tree
 - [ ] Heap
 - [ ] Graph
