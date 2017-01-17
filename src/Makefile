@@ -8,10 +8,10 @@ CFLAGS=-Wall -ansi
 # ******************************************************
 # Entries to bring the executable up to date
 
-main: main.o node.o linkedlist.o stack.o
-	$(CC) $(CFLAGS) -o main main.o node.o linkedlist.o stack.o
+main: main.o node.o linkedlist.o stack.o queue.o
+	$(CC) $(CFLAGS) -o main main.o node.o linkedlist.o stack.o queue.o
 
-main.o: main.c node.h linkedlist.h stack.h
+main.o: main.c node.h linkedlist.h stack.h queue.h
 	$(CC) $(CFLAGS) -c main.c
 
 node.o: node.c node.h
@@ -22,3 +22,6 @@ linkedlist.o: linkedlist.c linkedlist.h node.h
 
 stack.o: stack.c stack.h node.h
 	$(CC) $(CFLAGS) -c stack.c
+
+queue.o: queue.c queue.h
+	$(CC) $(CFLAGS) -c queue.c
